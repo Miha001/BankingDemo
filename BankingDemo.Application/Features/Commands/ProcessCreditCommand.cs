@@ -1,6 +1,5 @@
 ﻿using BankingDemo.Application.Abstractions;
 using BankingDemo.Application.Features.Dto;
-using BankingDemo.Domain.Exceptions;
 using MediatR;
 
 namespace BankingDemo.Application.Features.Commands;

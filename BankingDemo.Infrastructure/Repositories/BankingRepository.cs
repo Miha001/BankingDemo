@@ -77,7 +77,7 @@ public class BankingRepository(FinanceDbContext db) : IBankingRepository
     public async Task<TransactionResultDto> RevertAsync(Guid transactionId, DateTime serverDate, CancellationToken ct)
     {
         var tx = await db.Transactions.FirstOrDefaultAsync(t => t.Id == transactionId, ct)
-            ?? throw new Exception("Транзацкия не найдена");
+            ?? throw new TransactionNotExistException();
 
         if (tx.IsReverted)
             return await GetClientBalanceAsync(tx.ClientId, ct);
@@ -106,7 +106,7 @@ public class BankingRepository(FinanceDbContext db) : IBankingRepository
 
         if(client is null)
         {
-            throw new ClientNotExist(clientId);
+            throw new ClientNotExistException(clientId);
         }
 
         return new TransactionResultDto(DateTime.UtcNow, client?.Balance ?? 0);
