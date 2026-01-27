@@ -10,9 +10,8 @@ public static class TransactionEndpoints
 {
     public static void MapTransactionEndpoints(this IEndpointRouteBuilder app)
     {
-        var group = app.MapGroup("")
-            .WithTags("Transactions")
-            .WithOpenApi();
+        var group = app.MapGroup(string.Empty)
+            .WithTags("Transactions");
 
         group.MapPost("/credit", Credit);
         group.MapPost("/debit", Debit);

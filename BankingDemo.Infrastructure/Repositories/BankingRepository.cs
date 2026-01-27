@@ -33,7 +33,7 @@ public class BankingRepository(FinanceDbContext db) : IBankingRepository
                 await transaction.CommitAsync(ct);
                 return result;
             }
-            catch(BaseException ex)
+            catch(InternalException ex)
             {
                 await transaction.RollbackAsync(ct);
                 throw;

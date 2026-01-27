@@ -1,3 +1,9 @@
-﻿namespace BankingDemo.Domain.Exceptions;
+﻿using System.Net;
 
-public class ClientNotExist(Guid clientId) : BaseException($"Пользователя с id={clientId} не существует");
+namespace BankingDemo.Domain.Exceptions;
+
+public class ClientNotExist(Guid clientId) : InternalException($"Пользователя с id={clientId} не существует")
+{
+    /// <inheritdoc/>
+    public override HttpStatusCode HttpStatusCode { get; } = HttpStatusCode.BadRequest;
+}

@@ -1,4 +1,6 @@
-﻿namespace BankingDemo.Domain.Entities;
+﻿using BankingDemo.Domain.Exceptions;
+
+namespace BankingDemo.Domain.Entities;
 
 public class Client
 {
@@ -18,6 +20,11 @@ public class Client
 
     public void Debit(decimal amount)
     {
+        if(amount > Balance)
+        {
+            throw new NotEnoughFundsException();
+        }
+
         Balance -= amount;
     }
 }

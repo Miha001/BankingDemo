@@ -32,8 +32,8 @@ public class ExceptionHandlingMiddleware(RequestDelegate next, ILogger<Exception
                     .ToDictionary(g => g.Key, g => g.Select(e => e.ErrorMessage).ToArray());
                 break;
 
-            case BaseException bex:
-                problem.Status = StatusCodes.Status400BadRequest;
+            case InternalException bex:
+                problem.Status = (int)bex.HttpStatusCode;
                 problem.Title = bex.Message;
                 break;
 
