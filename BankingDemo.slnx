@@ -1,0 +1,10 @@
+<Solution>
+  <Folder Name="/SolutionItems/">
+    <File Path=".dockerignore" />
+    <File Path="docker-compose.yml" />
+  </Folder>
+  <Project Path="BankingDemo.API/BankingDemo.API.csproj" />
+  <Project Path="BankingDemo.Application/BankingDemo.Application.csproj" />
+  <Project Path="BankingDemo.Domain/BankingDemo.Domain.csproj" />
+  <Project Path="BankingDemo.Infrastructure/BankingDemo.Infrastructure.csproj" />
+</Solution>
