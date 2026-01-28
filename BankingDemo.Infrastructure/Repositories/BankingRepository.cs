@@ -9,7 +9,7 @@ namespace BankingDemo.Infrastructure.Repositories;
 
 public class BankingRepository(FinanceDbContext db) : IBankingRepository
 {
-    private async Task<TransactionResultDto> ProcessLock(Guid clientId, Func<Client, Task<TransactionResultDto>> action, CancellationToken ct)
+    private async Task<TransactionResultDto> ProcessLock(Guid clientId, Func<Client, ValueTask<TransactionResultDto>> action, CancellationToken ct)
     {
         var strategy = db.Database.CreateExecutionStrategy();
         return await strategy.ExecuteAsync(async () =>

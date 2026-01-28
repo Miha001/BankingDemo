@@ -1,6 +1,6 @@
-﻿using BankingDemo.Application.Features.Commands;
+﻿using BankingDemo.API.Requests;
+using BankingDemo.Application.Features.Commands;
 using BankingDemo.Application.Features.Queries;
-using BankingDemo.Domain.Models.Requests;
 using MediatR;
 using Microsoft.AspNetCore.Mvc;
 

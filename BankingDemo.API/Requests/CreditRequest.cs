@@ -1,6 +1,6 @@
-﻿namespace BankingDemo.Domain.Models.Requests;
+﻿namespace BankingDemo.API.Requests;
 
-public record DebitRequest(
+public record CreditRequest(
     Guid Id,
     Guid ClientId,
     DateTime DateTime,
