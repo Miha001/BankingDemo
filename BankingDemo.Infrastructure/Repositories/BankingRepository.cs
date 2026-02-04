@@ -79,11 +79,11 @@ public class BankingRepository(FinanceDbContext db) : IBankingRepository
         var tx = await db.Transactions.FirstOrDefaultAsync(t => t.Id == transactionId, ct)
             ?? throw new TransactionNotExistException();
 
-        if (tx.IsReverted)
-            return await GetClientBalanceAsync(tx.ClientId, ct);
-
         return await ProcessLock(tx.ClientId, async (client) =>
         {
+            if (tx.IsReverted)
+                return await GetClientBalanceAsync(tx.ClientId, ct);
+
             tx.IsReverted = true;
 
             // Отмена кредита = списание, отмена дебита = зачисление
