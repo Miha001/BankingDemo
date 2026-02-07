@@ -1,5 +1,4 @@
-﻿using BankingDemo.API.Requests;
-using BankingDemo.Application.Features.Commands;
+﻿using BankingDemo.Application.Features.Commands;
 using BankingDemo.Application.Features.Queries;
 using MediatR;
 using Microsoft.AspNetCore.Mvc;
@@ -21,31 +20,29 @@ public static class TransactionEndpoints
     }
 
     private static async Task<IResult> Credit(
-        [FromBody] CreditRequest req,
+        [FromBody] CreditCommand command,
         IMediator mediator,
         CancellationToken ct)
     {
-        var command = new CreditCommand(req.Id, req.ClientId, req.DateTime, req.Amount);
         var result = await mediator.Send(command, ct);
         return Results.Ok(result);
     }
 
     private static async Task<IResult> Debit(
-        [FromBody] DebitRequest req,
+        [FromBody] DebitCommand command,
         IMediator mediator,
         CancellationToken ct)
     {
-        var command = new DebitCommand(req.Id, req.ClientId, req.DateTime, req.Amount);
         var result = await mediator.Send(command, ct);
         return Results.Ok(result);
     }
 
     private static async Task<IResult> Revert(
-        [FromQuery] Guid id,
+        [AsParameters] RevertCommand command,
         IMediator mediator,
         CancellationToken ct)
     {
-        var result = await mediator.Send(new RevertCommand(id), ct);
+        var result = await mediator.Send(command, ct);
 
         return Results.Ok(new
         {
@@ -55,11 +52,11 @@ public static class TransactionEndpoints
     }
 
     private static async Task<IResult> GetBalance(
-        [FromQuery] Guid id,
+        [AsParameters] GetBalanceQuery query,
         IMediator mediator,
         CancellationToken ct)
     {
-        var result = await mediator.Send(new GetBalanceQuery(id), ct);
+        var result = await mediator.Send(query, ct);
 
         return Results.Ok(new
         {
