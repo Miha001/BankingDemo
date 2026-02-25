@@ -6,6 +6,7 @@ using BankingDemo.Application.Features.Commands;
 using BankingDemo.Infrastructure.Persistence;
 using BankingDemo.Infrastructure.Repositories;
 using FluentValidation;
+using Microsoft.AspNetCore.HttpOverrides;
 using Microsoft.EntityFrameworkCore;
 using Serilog;
 
@@ -41,7 +42,12 @@ try
     });
     
     var app = builder.Build();
-    
+
+    app.UseForwardedHeaders(new ForwardedHeadersOptions
+    {
+        ForwardedHeaders = ForwardedHeaders.XForwardedFor | ForwardedHeaders.XForwardedProto
+    });
+
     app.UseSwagger();
     app.UseSwaggerUI(c =>
     {

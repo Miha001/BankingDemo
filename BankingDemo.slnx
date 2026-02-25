@@ -2,6 +2,7 @@
   <Folder Name="/SolutionItems/">
     <File Path=".dockerignore" />
     <File Path="docker-compose.yml" />
+    <File Path="nginx.conf" />
   </Folder>
   <Project Path="BankingDemo.API/BankingDemo.API.csproj" />
   <Project Path="BankingDemo.Application/BankingDemo.Application.csproj" />
