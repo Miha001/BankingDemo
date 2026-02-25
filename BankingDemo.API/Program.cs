@@ -19,7 +19,9 @@ try
     Log.Information("Starting Web API...");
 
     var builder = WebApplication.CreateBuilder(args);
-    
+
+    builder.Services.AddHealthChecks();
+
     builder.Host.UseSerilog((context, services, configuration) => configuration
         .ReadFrom.Configuration(context.Configuration)
         .ReadFrom.Services(services));
@@ -66,6 +68,8 @@ try
     app.UseMiddleware<ExceptionHandlingMiddleware>();
 
     app.MapTransactionEndpoints();
+
+    app.MapHealthChecks("/health");
 
     app.Run();
 }
